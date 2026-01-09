@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Notes{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'notes/css/list.css' %}">
+  
+{% endblock %}
+{% block content %}
+<div class="notes-list">
+    <h1>Your Updates</h1>
+
+    <div class="list">
+      {% for record in object_list %}
+        <div class="note">
+            {% if record.image %}
+                <img src="{{ record.image.url }}" alt="Note Image">
+            {% endif %}
+            <h3>{{ record.title }}</h3>
+            <p>{{ record.content }}</p>
+
+            <label>Created on: {{ record.created_at }}</label>
+            <label>Last updated on: {{ record.updated_at }}</label>
+            <label>Category: {{ record.category.name }}</label>
+        </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+  
+{% endblock %}

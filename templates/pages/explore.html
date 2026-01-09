@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+
+{% block title %}Explore - Clearview{% endblock %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/explore.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Header Section -->
+    <section class="explore-header">
+        <div class="container">
+            <h1 class="page-title">Explore Weather Moments</h1>
+            <p class="page-subtitle">Discover how the world experiences weather through real photos and videos</p>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    <i class="fas fa-globe"></i> All
+                </button>
+                <button class="filter-tab" data-filter="trending">
+                    <i class="fas fa-fire"></i> Trending
+                </button>
+                <button class="filter-tab" data-filter="recent">
+                    <i class="fas fa-clock"></i> Recent
+                </button>
+                <button class="filter-tab" data-filter="featured">
+                    <i class="fas fa-star"></i> Featured
+                </button>
+            </div>
+
+            <!-- Weather Type Filters -->
+            <div class="weather-filters">
+                <button class="weather-chip" data-weather="all">All Weather</button>
+                <button class="weather-chip sunny" data-weather="sunny">
+                    <i class="fas fa-sun"></i> Sunny
+                </button>
+                <button class="weather-chip rainy" data-weather="rainy">
+                    <i class="fas fa-cloud-rain"></i> Rainy
+                </button>
+                <button class="weather-chip cloudy" data-weather="cloudy">
+                    <i class="fas fa-cloud"></i> Cloudy
+                </button>
+                <button class="weather-chip snowy" data-weather="snowy">
+                    <i class="fas fa-snowflake"></i> Snowy
+                </button>
+                <button class="weather-chip stormy" data-weather="stormy">
+                    <i class="fas fa-bolt"></i> Stormy
+                </button>
+                <button class="weather-chip foggy" data-weather="foggy">
+                    <i class="fas fa-smog"></i> Foggy
+                </button>
+                <button class="weather-chip windy" data-weather="windy">
+                    <i class="fas fa-wind"></i> Windy
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moments Grid -->
+    <section class="moments-section">
+        <div class="container">
+            <div class="moments-masonry" id="momentsGrid">
+                
+                <!-- Sunny Moment 1 -->
+                <div class="moment-item" data-weather="sunny" data-type="trending">
+                    <div class="moment-card-explore sunny-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@sarah_travels</div>
+                                    <div class="post-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge sunny">
+                                    <i class="fas fa-sun"></i> 78°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Malibu, CA
+                                </div>
+                            </div>
+                            <p class="moment-caption">Perfect beach day! ☀️🌊</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 1.2k</span>
+                                <span><i class="fas fa-comment"></i> 89</span>
+                                <span><i class="fas fa-share"></i> 45</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rainy Moment -->
+                <div class="moment-item" data-weather="rainy" data-type="recent">
+                    <div class="moment-card-explore rainy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-cloud-rain"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@rainylover</div>
+                                    <div class="post-time">45 minutes ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge rainy">
+                                    <i class="fas fa-cloud-rain"></i> 55°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Seattle, WA
+                                </div>
+                            </div>
+                            <p class="moment-caption">Cozy rainy afternoon with coffee ☕🌧️</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 856</span>
+                                <span><i class="fas fa-comment"></i> 34</span>
+                                <span><i class="fas fa-share"></i> 12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snowy Moment -->
+                <div class="moment-item" data-weather="snowy" data-type="featured">
+                    <div class="moment-card-explore snowy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@mountain_mike</div>
+                                    <div class="post-time">1 day ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge snowy">
+                                    <i class="fas fa-snowflake"></i> 22°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Aspen, CO
+                                </div>
+                            </div>
+                            <p class="moment-caption">Fresh powder! Best skiing conditions ⛷️❄️</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 2.4k</span>
+                                <span><i class="fas fa-comment"></i> 156</span>
+                                <span><i class="fas fa-share"></i> 89</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stormy Moment -->
+                <div class="moment-item" data-weather="stormy" data-type="trending">
+                    <div class="moment-card-explore stormy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=4" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@storm_chaser</div>
+                                    <div class="post-time">3 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge stormy">
+                                    <i class="fas fa-bolt"></i> 68°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Miami, FL
+                                </div>
+                            </div>
+                            <p class="moment-caption">Incredible lightning show tonight! ⚡🌩️</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 3.1k</span>
+                                <span><i class="fas fa-comment"></i> 203</span>
+                                <span><i class="fas fa-share"></i> 145</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Foggy Moment -->
+                <div class="moment-item" data-weather="foggy" data-type="recent">
+                    <div class="moment-card-explore foggy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-smog"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@fog_vibes</div>
+                                    <div class="post-time">5 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge foggy">
+                                    <i class="fas fa-smog"></i> 58°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> San Francisco, CA
+                                </div>
+                            </div>
+                            <p class="moment-caption">Golden Gate disappearing into the fog 🌁</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 987</span>
+                                <span><i class="fas fa-comment"></i> 67</span>
+                                <span><i class="fas fa-share"></i> 34</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloudy Moment -->
+                <div class="moment-item" data-weather="cloudy" data-type="recent">
+                    <div class="moment-card-explore cloudy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=6" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@sky_watcher</div>
+                                    <div class="post-time">8 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge cloudy">
+                                    <i class="fas fa-cloud"></i> 64°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Portland, OR
+                                </div>
+                            </div>
+                            <p class="moment-caption">Moody skies and coffee shops ☁️☕</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 745</span>
+                                <span><i class="fas fa-comment"></i> 42</span>
+                                <span><i class="fas fa-share"></i> 18</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sunny Moment 2 -->
+                <div class="moment-item" data-weather="sunny" data-type="featured">
+                    <div class="moment-card-explore sunny-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=7" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@desert_wanderer</div>
+                                    <div class="post-time">12 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge sunny">
+                                    <i class="fas fa-sun"></i> 95°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Phoenix, AZ
+                                </div>
+                            </div>
+                            <p class="moment-caption">Desert heat! Stay hydrated everyone 🌵☀️</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 1.5k</span>
+                                <span><i class="fas fa-comment"></i> 112</span>
+                                <span><i class="fas fa-share"></i> 56</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Windy Moment -->
+                <div class="moment-item" data-weather="windy" data-type="trending">
+                    <div class="moment-card-explore windy-gradient">
+                        <div class="gradient-overlay"></div>
+                        <div class="weather-icon-bg">
+                            <i class="fas fa-wind"></i>
+                        </div>
+                        <div class="moment-content">
+                            <div class="moment-header">
+                                <img src="https://i.pravatar.cc/150?img=8" alt="User" class="user-avatar-small">
+                                <div class="user-info">
+                                    <div class="username">@wind_surfer</div>
+                                    <div class="post-time">4 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="moment-details">
+                                <div class="weather-badge windy">
+                                    <i class="fas fa-wind"></i> 72°F
+                                </div>
+                                <div class="location-badge">
+                                    <i class="fas fa-map-marker-alt"></i> Chicago, IL
+                                </div>
+                            </div>
+                            <p class="moment-caption">Windy City living up to its name! 💨</p>
+                            <div class="moment-stats">
+                                <span><i class="fas fa-heart"></i> 654</span>
+                                <span><i class="fas fa-comment"></i> 38</span>
+                                <span><i class="fas fa-share"></i> 22</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Load More Button -->
+            <div class="text-center mt-5">
+                <button class="btn-load-more">
+                    <i class="fas fa-arrow-down"></i>
+                    Load More Moments
+                </button>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/explore.js' %}"></script>
+{% endblock %}

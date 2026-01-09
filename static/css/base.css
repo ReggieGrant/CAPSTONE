@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    padding: 20px;
+    min-height: 80vh;
+}
+
+
+
+h1 {
+    color: #333;
+}
+
+
+footer {
+        background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    }
+    
+    .hover-primary {
+        transition: color 0.2s ease;
+    }
+    
+    .hover-primary:hover {
+        color: #0d6efd !important;
+    }
+    
+    footer h5 {
+        font-weight: 600;
+        color: #212529;
+    }
+    
+    footer a {
+        transition: all 0.2s ease;
+    }
+
+

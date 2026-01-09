@@ -1,0 +1,462 @@
+/* ==================== EXPLORE PAGE STYLES ==================== */
+
+/* ==================== EXPLORE HEADER ==================== */
+.explore-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 3rem 0 2rem;
+    margin-top: -76px;
+    padding-top: calc(3rem + 76px);
+}
+
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+/* ==================== FILTER TABS ==================== */
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-tab:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.filter-tab.active {
+    background: white;
+    color: #667eea;
+    border-color: white;
+}
+
+/* ==================== WEATHER FILTERS ==================== */
+.weather-filters {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.weather-chip {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.weather-chip:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.weather-chip.active {
+    background: white;
+    color: #667eea;
+}
+
+.weather-chip.sunny.active { color: #f5a623; }
+.weather-chip.rainy.active { color: #4a90e2; }
+.weather-chip.cloudy.active { color: #95a5a6; }
+.weather-chip.snowy.active { color: #5dade2; }
+.weather-chip.stormy.active { color: #8e44ad; }
+.weather-chip.foggy.active { color: #7f8c8d; }
+.weather-chip.windy.active { color: #16a085; }
+
+/* ==================== MOMENTS SECTION ==================== */
+.moments-section {
+    padding: 3rem 0;
+    background: #f8f9fa;
+}
+
+.moments-masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.moment-item {
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation for items */
+.moment-item:nth-child(1) { animation-delay: 0.1s; }
+.moment-item:nth-child(2) { animation-delay: 0.2s; }
+.moment-item:nth-child(3) { animation-delay: 0.3s; }
+.moment-item:nth-child(4) { animation-delay: 0.4s; }
+.moment-item:nth-child(5) { animation-delay: 0.5s; }
+.moment-item:nth-child(6) { animation-delay: 0.6s; }
+.moment-item:nth-child(7) { animation-delay: 0.7s; }
+.moment-item:nth-child(8) { animation-delay: 0.8s; }
+.moment-item:nth-child(9) { animation-delay: 0.9s; }
+
+/* ==================== MOMENT CARD ==================== */
+.moment-card-explore {
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.moment-card-explore:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Weather-specific gradients */
+.sunny-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd140 100%);
+}
+
+.rainy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #667eea 100%);
+}
+
+.snowy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #e0f7fa 100%);
+}
+
+.stormy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #434343 0%, #000000 50%, #667eea 100%);
+}
+
+.foggy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 50%, #d299c2 100%);
+}
+
+.cloudy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 50%, #9e9e9e 100%);
+}
+
+.windy-gradient .gradient-overlay {
+    background: linear-gradient(135deg, #16a085 0%, #f4d03f 50%, #1abc9c 100%);
+}
+
+.weather-icon-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12rem;
+    color: rgba(255, 255, 255, 0.15);
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+.moment-card-explore:hover .weather-icon-bg {
+    transform: translate(-50%, -50%) scale(1.2) rotate(15deg);
+    opacity: 0.3;
+}
+
+.moment-content {
+    position: relative;
+    z-index: 3;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+    margin-top: auto;
+}
+
+/* ==================== MOMENT HEADER ==================== */
+.moment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.user-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.username {
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+}
+
+.post-time {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==================== MOMENT DETAILS ==================== */
+.moment-details {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.weather-badge,
+.location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+.weather-badge.sunny { background: rgba(255, 193, 7, 0.3); }
+.weather-badge.rainy { background: rgba(74, 144, 226, 0.3); }
+.weather-badge.cloudy { background: rgba(149, 165, 166, 0.3); }
+.weather-badge.snowy { background: rgba(93, 173, 226, 0.3); }
+.weather-badge.stormy { background: rgba(142, 68, 173, 0.3); }
+.weather-badge.foggy { background: rgba(127, 140, 141, 0.3); }
+.weather-badge.windy { background: rgba(22, 160, 133, 0.3); }
+
+/* ==================== MOMENT CAPTION ==================== */
+.moment-caption {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* ==================== MOMENT STATS ==================== */
+.moment-stats {
+    display: flex;
+    gap: 1.5rem;
+    color: white;
+    font-size: 0.95rem;
+}
+
+.moment-stats span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.moment-stats span:hover {
+    transform: scale(1.1);
+    color: #ffd140;
+}
+
+/* ==================== LOAD MORE BUTTON ==================== */
+.btn-load-more {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.btn-load-more:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.btn-load-more:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-load-more i {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ==================== RESULTS COUNT ==================== */
+.results-count {
+    text-align: center;
+    margin: 2rem 0;
+    font-size: 1.1rem;
+    color: #7f8c8d;
+}
+
+.results-count strong {
+    color: #667eea;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 991px) {
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .moments-masonry {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .weather-icon-bg {
+        font-size: 8rem;
+    }
+
+    .filter-tabs {
+        gap: 0.5rem;
+    }
+
+    .filter-tab {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 2rem;
+    }
+
+    .page-subtitle {
+        font-size: 1rem;
+    }
+
+    .moments-masonry {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .weather-filters {
+        gap: 0.5rem;
+    }
+
+    .weather-chip {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .moment-card-explore {
+        min-height: 350px;
+    }
+
+    .weather-icon-bg {
+        font-size: 6rem;
+    }
+
+    .filter-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .explore-header {
+        padding: 2rem 0 1.5rem;
+        padding-top: calc(2rem + 76px);
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .filter-tabs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-tab {
+        justify-content: center;
+    }
+
+    .moment-content {
+        padding: 1rem;
+    }
+
+    .weather-icon-bg {
+        font-size: 5rem;
+    }
+}
+
+/* ==================== HIDDEN STATE ==================== */
+.moment-item[style*="display: none"] {
+    display: none !important;
+}
