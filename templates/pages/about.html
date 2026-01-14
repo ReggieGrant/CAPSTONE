@@ -1,9 +1,303 @@
 {% extends 'base.html' %}
 
-{% block title %}About - Capstone Project{% endblock %}
+{% block title %}About Us - Clearview{% endblock %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
 
 {% block content %}
-    <div class="about">
-        <h1>Welcome to the About Page</h1>   
-    </div>
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="page-title">About Clearview</h1>
+            <p class="page-subtitle">Weather through the eyes of the world</p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h2 class="section-heading">Our Mission</h2>
+                    <p class="mission-text">
+                        We believe weather is more than just numbers and forecasts. It's the feeling of raindrops on your skin, the warmth of sunshine on your face, and the beauty of snow-covered mountains.
+                    </p>
+                    <p class="mission-text">
+                        Clearview connects people through authentic weather experiences, transforming how we understand and share the world's atmospheric beauty.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mission-visual">
+                        <div class="visual-card card-1">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Real Moments</span>
+                        </div>
+                        <div class="visual-card card-2">
+                            <i class="fas fa-users"></i>
+                            <span>Global Community</span>
+                        </div>
+                        <div class="visual-card card-3">
+                            <i class="fas fa-heart"></i>
+                            <span>Authentic Stories</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Our Story</h2>
+                <p class="section-subtitle">How Clearview came to be</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>The Idea</h3>
+                        <p>
+                            It started with a simple question: "What does 75°F and sunny really look like?" Weather apps show numbers, but they don't show you the experience. We wanted to change that.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Building the Platform</h3>
+                        <p>
+                            We combined real-time weather data with user-generated content to create something unique—a weather app that shows you actual moments from around the world.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Adding Atmosphere</h3>
+                        <p>
+                            Weather has a soundtrack. We integrated ambient music that matches current conditions, creating an immersive, multi-sensory experience.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Global Community</h3>
+                        <p>
+                            Today, thousands of users share their weather moments daily, creating a living gallery of Earth's atmospheric beauty.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">What Makes Us Different</h2>
+                <p class="section-subtitle">Experience weather like never before</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon sunny">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h3>Real Photos & Videos</h3>
+                        <p>See actual weather conditions through authentic content shared by people around the world.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon rainy">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h3>Weather-Matched Music</h3>
+                        <p>Enjoy ambient soundscapes that complement current weather conditions for a complete sensory experience.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon snowy">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Minimalist Design</h3>
+                        <p>Clean, beautiful interface that puts the focus on weather and community, not clutter.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon stormy">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Global Community</h3>
+                        <p>Connect with weather enthusiasts worldwide and discover how different locations experience the elements.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon foggy">
+                            <i class="fas fa-search-location"></i>
+                        </div>
+                        <h3>Location Discovery</h3>
+                        <p>Explore weather conditions anywhere in the world before you travel or just out of curiosity.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <div class="feature-icon cloudy">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Real-Time Data</h3>
+                        <p>Powered by accurate weather APIs with updates every 10 minutes for the most current information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Our Values</h2>
+                <p class="section-subtitle">What we believe in</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-number">01</div>
+                        <h3>Authenticity</h3>
+                        <p>Real photos from real people. No stock images, no fake moments—just genuine weather experiences.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-number">02</div>
+                        <h3>Community</h3>
+                        <p>We're building a global network of weather lovers who share, connect, and inspire each other.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="value-card">
+                        <div class="value-number">03</div>
+                        <h3>Simplicity</h3>
+                        <p>Beautiful design shouldn't be complicated. We believe in clean, intuitive experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Weather Moments</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">150+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Photo Views</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section (Optional) -->
+    <section class="team-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-heading">Meet the Team</h2>
+                <p class="section-subtitle">The people behind Clearview</p>
+            </div>
+
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="team-card">
+                        <div class="team-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Reginald Wayne Grant Jr.</h4>
+                        <p class="team-role">Founder & Developer</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container text-center">
+            <i class="fas fa-cloud-upload-alt cta-icon"></i>
+            <h2 class="cta-title">Join Our Community</h2>
+            <p class="cta-text">
+                Start sharing your weather moments today and connect with people around the world.
+            </p>
+            <div class="cta-buttons">
+                <a href="{% url 'home' %}" class="btn-cta-primary">
+                    <i class="fas fa-home"></i>
+                    Explore Weather
+                </a>
+                <a href="{% url 'upload' %}" class="btn-cta-secondary">
+                    <i class="fas fa-upload"></i>
+                    Share Moment
+                </a>
+            </div>
+        </div>
+    </section>
 {% endblock %}

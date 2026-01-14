@@ -2,9 +2,11 @@ import requests
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.conf import settings
-from datetime import datetime, timedelta
+from datetime import datetime
 
-# Create your views here.
+from notes.models import Note
+
+# ==================== EXISTING VIEWS ====================
 def home_view(request):
     return render(request, 'pages/home.html')
 
@@ -20,44 +22,14 @@ def locations_view(request):
 def upload_view(request):
     return render(request, 'pages/upload.html')
 
-def search_location(request):
-    """Search for a location and return weather data"""
-    
-    query = request.GET.get('q', '')
-    if not query:
-        return JsonResponse({'error': 'Search query is required'}, status=400)
-    
-    api_key = getattr(settings, 'OPENWEATHER_API_KEY', 'YOUR_API_KEY_HERE')
-    
-    # Use geocoding API to search for locations
-    geo_url = f"http://api.openweathermap.org/geo/1.0/direct"
-    geo_params = {
-        'q': query,
-        'limit': 5,
-        'appid': api_key
-    }
-    
-    try:
-        response = requests.get(geo_url, params=geo_params, timeout=5)
-        response.raise_for_status()
-        locations = response.json()
-        
-        results = []
-        for loc in locations:
-            results.append({
-                'name': loc['name'],
-                'state': loc.get('state', ''),
-                'country': loc['country'],
-                'lat': loc['lat'],
-                'lon': loc['lon'],
-                'display_name': f"{loc['name']}, {loc.get('state', '')}, {loc['country']}".replace(', ,', ',')
-            })
-        
-        return JsonResponse({'results': results})
-        
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({'error': 'Unable to search locations'}, status=500)
+def note_details_view(request, note_id):
+    note = Note.objects.get(id=note_id)
+    return render(request, 'pages/note_details.html', {'note': note})
 
+def community_view(request):
+    return render(request, 'pages/community.html')
+
+# ==================== HELPER FUNCTIONS ====================
 def get_weather_icon(weather_code, is_day=True):
     """Convert OpenWeatherMap icon code to FontAwesome icon class"""
     icon_mapping = {
@@ -71,34 +43,45 @@ def get_weather_icon(weather_code, is_day=True):
         '13': 'fa-snowflake',
         '50': 'fa-smog'
     }
-    code_prefix = weather_code[:2]
+    code_prefix = weather_code[:2] if len(weather_code) >= 2 else weather_code
     return icon_mapping.get(code_prefix, 'fa-cloud')
 
+# ==================== MAIN HOME VIEW ====================
 def home(request):
     """Home page with weather data"""
     
-    # Default location (can be changed based on user's IP or preferences)
+    print("=" * 50)
+    print("HOME VIEW CALLED")
+    print("=" * 50)
+    
+    # Default location
     city = request.GET.get('city', 'Temecula')
     country = request.GET.get('country', 'US')
     
-    # OpenWeatherMap API key - Add this to your settings.py
-    api_key = getattr(settings, 'OPENWEATHER_API_KEY', 'YOUR_API_KEY_HERE')
+    print(f"Requested city: {city}, {country}")
     
-    # Current weather API call
-    current_weather_url = f"http://api.openweathermap.org/data/2.5/weather"
+    # Get API key from settings
+    api_key = getattr(settings, 'OPENWEATHER_API_KEY', '')
+    
+    print(f"API Key found: {'Yes' if api_key else 'NO - THIS IS THE PROBLEM!'}")
+    if api_key:
+        print(f"API Key (first 10 chars): {api_key[:10]}...")
+    
+    # API endpoints
+    current_weather_url = "http://api.openweathermap.org/data/2.5/weather"
+    forecast_url = "http://api.openweathermap.org/data/2.5/forecast"
+    
     current_params = {
         'q': f"{city},{country}",
         'appid': api_key,
-        'units': 'imperial'  # Use 'metric' for Celsius
+        'units': 'imperial'
     }
     
-    # 7-day forecast API call
-    forecast_url = f"http://api.openweathermap.org/data/2.5/forecast"
     forecast_params = {
         'q': f"{city},{country}",
         'appid': api_key,
         'units': 'imperial',
-        'cnt': 40  # Get 5 days of data (8 readings per day)
+        'cnt': 40
     }
     
     context = {
@@ -108,10 +91,20 @@ def home(request):
     }
     
     try:
+        print("Making API request for current weather...")
+        
         # Fetch current weather
         current_response = requests.get(current_weather_url, params=current_params, timeout=5)
-        current_response.raise_for_status()
+        
+        print(f"API Response Status: {current_response.status_code}")
+        
+        if current_response.status_code != 200:
+            print(f"API Error Response: {current_response.text}")
+            raise requests.exceptions.RequestException(f"API returned {current_response.status_code}")
+        
         current_data = current_response.json()
+        
+        print(f"Weather data received for: {current_data.get('name', 'Unknown')}")
         
         # Parse current weather
         context['weather'] = {
@@ -123,45 +116,70 @@ def home(request):
             'icon': get_weather_icon(current_data['weather'][0]['icon']),
             'humidity': current_data['main']['humidity'],
             'wind_speed': round(current_data['wind']['speed']),
-            'visibility': round(current_data.get('visibility', 10000) / 1609.34),  # Convert to miles
+            'visibility': round(current_data.get('visibility', 10000) / 1609.34),
             'updated': datetime.fromtimestamp(current_data['dt']).strftime('%I:%M %p')
         }
         
+        print(f"Weather object created successfully!")
+        print(f"Temperature: {context['weather']['temp']}°F")
+        print(f"Condition: {context['weather']['condition']}")
+        
         # Fetch forecast
+        print("Making API request for forecast...")
         forecast_response = requests.get(forecast_url, params=forecast_params, timeout=5)
-        forecast_response.raise_for_status()
-        forecast_data = forecast_response.json()
         
-        # Parse forecast - get one reading per day (noon reading)
-        daily_forecasts = {}
-        for item in forecast_data['list']:
-            date = datetime.fromtimestamp(item['dt']).date()
-            hour = datetime.fromtimestamp(item['dt']).hour
+        if forecast_response.status_code == 200:
+            forecast_data = forecast_response.json()
             
-            # Get the midday reading (closest to noon)
-            if date not in daily_forecasts or abs(hour - 12) < abs(daily_forecasts[date]['hour'] - 12):
-                daily_forecasts[date] = {
-                    'date': date,
-                    'hour': hour,
-                    'day': date.strftime('%a') if date != datetime.now().date() else 'Today',
-                    'temp': round(item['main']['temp']),
-                    'condition': item['weather'][0]['main'],
-                    'icon': get_weather_icon(item['weather'][0]['icon'])
-                }
+            # Parse forecast
+            daily_forecasts = {}
+            for item in forecast_data['list']:
+                date = datetime.fromtimestamp(item['dt']).date()
+                hour = datetime.fromtimestamp(item['dt']).hour
+                
+                if date not in daily_forecasts or abs(hour - 12) < abs(daily_forecasts[date]['hour'] - 12):
+                    daily_forecasts[date] = {
+                        'date': date,
+                        'hour': hour,
+                        'day': date.strftime('%a') if date != datetime.now().date() else 'Today',
+                        'temp': round(item['main']['temp']),
+                        'condition': item['weather'][0]['main'],
+                        'icon': get_weather_icon(item['weather'][0]['icon'])
+                    }
+            
+            context['forecast'] = sorted(daily_forecasts.values(), key=lambda x: x['date'])[:7]
+            print(f"Forecast loaded: {len(context['forecast'])} days")
+        else:
+            print(f"Forecast request failed with status {forecast_response.status_code}")
         
-        # Convert to list and sort by date
-        context['forecast'] = sorted(daily_forecasts.values(), key=lambda x: x['date'])[:7]
+        print("✓ SUCCESS: Weather data loaded!")
         
     except requests.exceptions.RequestException as e:
-        context['error'] = "Unable to fetch weather data. Please try again later."
-        print(f"Weather API Error: {e}")
+        error_msg = f"Unable to fetch weather data. Please check your internet connection."
+        context['error'] = error_msg
+        print(f"✗ REQUEST ERROR: {str(e)}")
+        
     except KeyError as e:
-        context['error'] = "Error parsing weather data."
-        print(f"Weather Data Parse Error: {e}")
+        error_msg = f"Error parsing weather data from API."
+        context['error'] = error_msg
+        print(f"✗ PARSE ERROR: Missing key {str(e)}")
+        
+    except Exception as e:
+        error_msg = f"An unexpected error occurred."
+        context['error'] = error_msg
+        print(f"✗ UNEXPECTED ERROR: {str(e)}")
     
-    return render(request, 'home.html', context)
+    print("=" * 50)
+    print(f"Final Context:")
+    print(f"  - weather: {'✓ Available' if context['weather'] else '✗ None'}")
+    print(f"  - forecast: {len(context['forecast'])} days")
+    print(f"  - error: {context['error'] if context['error'] else 'None'}")
+    print("=" * 50)
+    
+    return render(request, 'pages/home.html', context)
 
 
+# ==================== API ENDPOINTS ====================
 def get_weather_api(request):
     """AJAX endpoint for getting weather data for any location"""
     
@@ -169,9 +187,9 @@ def get_weather_api(request):
     if not city:
         return JsonResponse({'error': 'City parameter is required'}, status=400)
     
-    api_key = getattr(settings, 'OPENWEATHER_API_KEY', 'YOUR_API_KEY_HERE')
+    api_key = getattr(settings, 'OPENWEATHER_API_KEY', '')
     
-    url = f"http://api.openweathermap.org/data/2.5/weather"
+    url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
         'q': city,
         'appid': api_key,
@@ -197,32 +215,22 @@ def get_weather_api(request):
         
         return JsonResponse(weather_data)
         
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         return JsonResponse({'error': 'Unable to fetch weather data'}, status=500)
-    except KeyError as e:
+    except KeyError:
         return JsonResponse({'error': 'Error parsing weather data'}, status=500)
 
 
-def explore(request):
-    """Explore page with community weather moments"""
-    
-    context = {
-        'page': 'explore',
-        # In production, fetch actual user posts from database
-        # moments = Post.objects.filter(is_public=True).order_by('-created_at')
-    }
-    
-    return render(request, 'explore.html', context)
-    """Search for a location and return weather data"""
+def search_location(request):
+    """Search for a location and return results"""
     
     query = request.GET.get('q', '')
     if not query:
         return JsonResponse({'error': 'Search query is required'}, status=400)
     
-    api_key = getattr(settings, 'OPENWEATHER_API_KEY', 'YOUR_API_KEY_HERE')
+    api_key = getattr(settings, 'OPENWEATHER_API_KEY', '')
     
-    # Use geocoding API to search for locations
-    geo_url = f"http://api.openweathermap.org/geo/1.0/direct"
+    geo_url = "http://api.openweathermap.org/geo/1.0/direct"
     geo_params = {
         'q': query,
         'limit': 5,
@@ -247,5 +255,16 @@ def explore(request):
         
         return JsonResponse({'results': results})
         
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         return JsonResponse({'error': 'Unable to search locations'}, status=500)
+
+
+# ==================== EXPLORE PAGE ====================
+def explore(request):
+    """Explore page with community weather moments"""
+    
+    context = {
+        'page': 'explore',
+    }
+    
+    return render(request, 'pages/explore.html', context)

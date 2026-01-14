@@ -4,9 +4,9 @@
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 6rem 0 4rem;
-    margin-top: -76px;
-    padding-top: calc(6rem + 76px);
     overflow: hidden;
+    /* REMOVED: margin-top: -76px; */
+    /* REMOVED: padding-top: calc(6rem + 76px); */
 }
 
 .hero-overlay {
@@ -74,7 +74,7 @@
 
 /* ==================== WEATHER WIDGET ==================== */
 .weather-widget-section {
-    margin-top: -60px;
+    margin-top: 3rem; /* CHANGED FROM: -60px */
     position: relative;
     z-index: 10;
     margin-bottom: 4rem;
@@ -614,7 +614,7 @@
         grid-template-columns: 1fr;
     }
 
-    .forecast-cards {
-        grid-template-columns: repeat(3, 1fr);
+        .forecast-cards {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
-}

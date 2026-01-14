@@ -23,87 +23,97 @@
         </div>
     </section>
 
-    <!-- Current Weather Widget -->
-    <section class="weather-widget-section">
-        <div class="container">
-            {% if error %}
-                <div class="alert alert-warning text-center">
-                    {{ error }}
-                </div>
-            {% endif %}
-            
-            {% if weather %}
-            <div class="weather-widget">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <div class="weather-main">
-                            <div class="weather-icon-large">
-                                <i class="fas {{ weather.icon }}"></i>
-                            </div>
-                            <div class="weather-info">
-                                <h2 class="weather-location">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    {{ weather.city }}, {{ weather.country }}
-                                </h2>
-                                <div class="weather-temp">{{ weather.temp }}°F</div>
-                                <div class="weather-condition">{{ weather.condition }}</div>
-                                <div class="weather-time">
-                                    <i class="far fa-clock"></i> Updated {{ weather.updated }}
-                                </div>
-                            </div>
+   <!-- Current Weather Widget -->
+<section class="weather-widget-section">
+    <div class="container">
+        <!-- Show error if API fails -->
+        {% if error %}
+            <div class="alert alert-warning text-center" style="background: #fff3cd; padding: 2rem; border-radius: 15px; color: #856404;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3>Weather Data Unavailable</h3>
+                <p>{{ error }}</p>
+                <small>The page will continue to work with default data.</small>
+            </div>
+        {% endif %}
+        
+        {% if weather %}
+        <!-- Weather data is available -->
+        <div class="weather-widget">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="weather-main">
+                        <div class="weather-icon-large">
+                            <i class="fas {{ weather.icon }}"></i>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="weather-details-grid">
-                            <div class="weather-detail">
-                                <i class="fas fa-wind"></i>
-                                <div class="detail-label">Wind</div>
-                                <div class="detail-value">{{ weather.wind_speed }} mph</div>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-tint"></i>
-                                <div class="detail-label">Humidity</div>
-                                <div class="detail-value">{{ weather.humidity }}%</div>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-eye"></i>
-                                <div class="detail-label">Visibility</div>
-                                <div class="detail-value">{{ weather.visibility }} mi</div>
-                            </div>
-                            <div class="weather-detail">
-                                <i class="fas fa-temperature-high"></i>
-                                <div class="detail-label">Feels Like</div>
-                                <div class="detail-value">{{ weather.feels_like }}°F</div>
+                        <div class="weather-info">
+                            <h2 class="weather-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ weather.city }}, {{ weather.country }}
+                            </h2>
+                            <div class="weather-temp">{{ weather.temp }}°F</div>
+                            <div class="weather-condition">{{ weather.condition }}</div>
+                            <div class="weather-time">
+                                <i class="far fa-clock"></i> Updated {{ weather.updated }}
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Music Player Bar -->
-                <div class="music-player">
-                    <div class="music-info">
-                        <i class="fas fa-music"></i>
-                        <span id="music-title">Playing: {{ weather.condition }} Ambience</span>
-                    </div>
-                    <div class="music-controls">
-                        <button class="music-btn"><i class="fas fa-step-backward"></i></button>
-                        <button class="music-btn music-play"><i class="fas fa-play"></i></button>
-                        <button class="music-btn"><i class="fas fa-step-forward"></i></button>
-                        <button class="music-btn"><i class="fas fa-volume-up"></i></button>
+                <div class="col-lg-6">
+                    <div class="weather-details-grid">
+                        <div class="weather-detail">
+                            <i class="fas fa-wind"></i>
+                            <div class="detail-label">Wind</div>
+                            <div class="detail-value">{{ weather.wind_speed }} mph</div>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-tint"></i>
+                            <div class="detail-label">Humidity</div>
+                            <div class="detail-value">{{ weather.humidity }}%</div>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-eye"></i>
+                            <div class="detail-label">Visibility</div>
+                            <div class="detail-value">{{ weather.visibility }} mi</div>
+                        </div>
+                        <div class="weather-detail">
+                            <i class="fas fa-temperature-high"></i>
+                            <div class="detail-label">Feels Like</div>
+                            <div class="detail-value">{{ weather.feels_like }}°F</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% else %}
-                <div class="weather-widget text-center">
-                    <div class="py-5">
-                        <i class="fas fa-cloud fa-4x text-muted mb-3"></i>
-                        <h3>Loading weather data...</h3>
-                        <p class="text-muted">Please wait while we fetch the latest weather information.</p>
-                    </div>
+            
+            <!-- Music Player Bar -->
+            <div class="music-player">
+                <div class="music-info">
+                    <i class="fas fa-music"></i>
+                    <span id="music-title">Playing: {{ weather.condition }} Ambience</span>
                 </div>
-            {% endif %}
+                <div class="music-controls">
+                    <button class="music-btn"><i class="fas fa-step-backward"></i></button>
+                    <button class="music-btn music-play"><i class="fas fa-play"></i></button>
+                    <button class="music-btn"><i class="fas fa-step-forward"></i></button>
+                    <button class="music-btn"><i class="fas fa-volume-up"></i></button>
+                </div>
+            </div>
         </div>
-    </section>
+        
+        {% else %}
+        <!-- No weather data - show loading or fallback -->
+        <div class="weather-widget text-center">
+            <div class="py-5">
+                <i class="fas fa-cloud fa-4x text-muted mb-3" style="color: #bdc3c7;"></i>
+                <h3>Loading weather data...</h3>
+                <p class="text-muted">Please wait while we fetch the latest weather information.</p>
+                <div class="spinner-border text-primary mt-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
 
     <!-- 7-Day Forecast -->
     <section class="forecast-section">

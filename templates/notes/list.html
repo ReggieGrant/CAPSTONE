@@ -4,7 +4,7 @@
 {% block title %}Notes{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'notes/css/list.css' %}" />
+<link rel="stylesheet" href="{% static 'css/list.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -22,7 +22,11 @@
 
             <label>Created on: {{ record.created_at }}</label>
             <label>Last updated on: {{ record.updated_at }}</label>
-            <label>Category: {{ record.category.name }}</label>
+            {% if record.category %}
+                <label>Category: {{ record.category.name }}</label>
+            {% else %}
+                <label>Category: None</label>
+            {% endif %}
         </div>
       {% endfor %}
     </div>

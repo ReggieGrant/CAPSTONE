@@ -1,0 +1,97 @@
+/* create.css */
+
+/* General page styles */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fb;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+/* Centered container for the form */
+.create-container {
+    max-width: 480px;
+    margin: 48px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 28px;
+}
+
+/* Form title */
+.create-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+    color: #2a4d69;
+}
+
+/* Form fields */
+.create-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #355c7d;
+}
+
+.create-form input,
+.create-form textarea,
+.create-form select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #cfd8dc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f5f7fa;
+    transition: border 0.2s;
+}
+
+.create-form input:focus,
+.create-form textarea:focus,
+.create-form select:focus {
+    border-color: #2a4d69;
+    outline: none;
+}
+
+/* Submit button */
+.create-form button[type="submit"] {
+    width: 100%;
+    background: #2a4d69;
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.create-form button[type="submit"]:hover {
+    background: #376996;
+}
+
+/* Error message styling */
+.create-error {
+    color: #d7263d;
+    background: #ffeaea;
+    border: 1px solid #f5c6cb;
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    font-size: 0.98rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .create-container {
+        padding: 18px 8px;
+        margin: 24px 4px;
+    }
+    .create-title {
+        font-size: 1.4rem;
+    }
+}

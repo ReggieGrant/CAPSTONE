@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create New Notes{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/create.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="notes-list">
+    <h1>Create New Note</h1>
+
+    <div class="list">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Note</button>
+      </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+  
+{% endblock %}
