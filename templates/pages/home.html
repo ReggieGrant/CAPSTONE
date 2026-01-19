@@ -1,390 +1,421 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Clearview - Weather through the eyes
+of the world{% endblock %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1 class="hero-title">Clearview</h1>
+    <p class="hero-tagline">Weather through the eyes of the world</p>
 
-{% block title %}Clearview - Weather through the eyes of the world{% endblock %}
-
-{% load static %}
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
-
-{% block content %}
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title">Clearview</h1>
-            <p class="hero-tagline">Weather through the eyes of the world</p>
-            
-            <!-- Location Search -->
-            <div class="hero-search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search any location...">
-            </div>
-        </div>
-    </section>
-
-   <!-- Current Weather Widget -->
-<section class="weather-widget-section">
-    <div class="container">
-        <!-- Show error if API fails -->
-        {% if error %}
-            <div class="alert alert-warning text-center" style="background: #fff3cd; padding: 2rem; border-radius: 15px; color: #856404;">
-                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <h3>Weather Data Unavailable</h3>
-                <p>{{ error }}</p>
-                <small>The page will continue to work with default data.</small>
-            </div>
-        {% endif %}
-        
-        {% if weather %}
-        <!-- Weather data is available -->
-        <div class="weather-widget">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="weather-main">
-                        <div class="weather-icon-large">
-                            <i class="fas {{ weather.icon }}"></i>
-                        </div>
-                        <div class="weather-info">
-                            <h2 class="weather-location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                {{ weather.city }}, {{ weather.country }}
-                            </h2>
-                            <div class="weather-temp">{{ weather.temp }}°F</div>
-                            <div class="weather-condition">{{ weather.condition }}</div>
-                            <div class="weather-time">
-                                <i class="far fa-clock"></i> Updated {{ weather.updated }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="weather-details-grid">
-                        <div class="weather-detail">
-                            <i class="fas fa-wind"></i>
-                            <div class="detail-label">Wind</div>
-                            <div class="detail-value">{{ weather.wind_speed }} mph</div>
-                        </div>
-                        <div class="weather-detail">
-                            <i class="fas fa-tint"></i>
-                            <div class="detail-label">Humidity</div>
-                            <div class="detail-value">{{ weather.humidity }}%</div>
-                        </div>
-                        <div class="weather-detail">
-                            <i class="fas fa-eye"></i>
-                            <div class="detail-label">Visibility</div>
-                            <div class="detail-value">{{ weather.visibility }} mi</div>
-                        </div>
-                        <div class="weather-detail">
-                            <i class="fas fa-temperature-high"></i>
-                            <div class="detail-label">Feels Like</div>
-                            <div class="detail-value">{{ weather.feels_like }}°F</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Music Player Bar -->
-            <div class="music-player">
-                <div class="music-info">
-                    <i class="fas fa-music"></i>
-                    <span id="music-title">Playing: {{ weather.condition }} Ambience</span>
-                </div>
-                <div class="music-controls">
-                    <button class="music-btn"><i class="fas fa-step-backward"></i></button>
-                    <button class="music-btn music-play"><i class="fas fa-play"></i></button>
-                    <button class="music-btn"><i class="fas fa-step-forward"></i></button>
-                    <button class="music-btn"><i class="fas fa-volume-up"></i></button>
-                </div>
-            </div>
-        </div>
-        
-        {% else %}
-        <!-- No weather data - show loading or fallback -->
-        <div class="weather-widget text-center">
-            <div class="py-5">
-                <i class="fas fa-cloud fa-4x text-muted mb-3" style="color: #bdc3c7;"></i>
-                <h3>Loading weather data...</h3>
-                <p class="text-muted">Please wait while we fetch the latest weather information.</p>
-                <div class="spinner-border text-primary mt-3" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
+    <!-- Location Search -->
+    <div class="hero-search">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search any location..." />
     </div>
+  </div>
 </section>
 
-    <!-- 7-Day Forecast -->
-    <section class="forecast-section">
-        <div class="container">
-            <h2 class="section-title">7-Day Forecast</h2>
-            {% if forecast %}
-            <div class="forecast-cards">
-                {% for day in forecast %}
-                <div class="forecast-card">
-                    <div class="forecast-day">{{ day.day }}</div>
-                    <i class="fas {{ day.icon }} forecast-icon"></i>
-                    <div class="forecast-temp">{{ day.temp }}°</div>
-                    <div class="forecast-condition">{{ day.condition }}</div>
-                </div>
-                {% endfor %}
+<!-- Current Weather Widget -->
+<section class="weather-widget-section">
+  <div class="container">
+    <!-- Show error if API fails -->
+    {% if error %}
+    <div
+      class="alert alert-warning text-center"
+      style="
+        background: #fff3cd;
+        padding: 2rem;
+        border-radius: 15px;
+        color: #856404;
+      "
+    >
+      <i
+        class="fas fa-exclamation-triangle"
+        style="font-size: 2rem; margin-bottom: 1rem"
+      ></i>
+      <h3>Weather Data Unavailable</h3>
+      <p>{{ error }}</p>
+      <small>The page will continue to work with default data.</small>
+    </div>
+    {% endif %} {% if weather %}
+    <!-- Weather data is available -->
+    <div class="weather-widget">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <div class="weather-main">
+            <div class="weather-icon-large">
+              <i class="fas {{ weather.icon }}"></i>
             </div>
-            {% else %}
-            <div class="text-center text-muted">
-                <p>Forecast data unavailable</p>
+            <div class="weather-info">
+              <h2 class="weather-location">
+                <i class="fas fa-map-marker-alt"></i>
+                {{ weather.city }}, {{ weather.country }}
+              </h2>
+              <div class="weather-temp">{{ weather.temp }}°F</div>
+              <div class="weather-condition">{{ weather.condition }}</div>
+              <div class="weather-time">
+                <i class="far fa-clock"></i> Updated {{ weather.updated }}
+              </div>
             </div>
-            {% endif %}
+          </div>
         </div>
-    </section>
-
-    <!-- Community Moments Section -->
-    <section class="community-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Trending Weather Moments</h2>
-                <a href="{% url 'explore' %}" class="btn-see-all">
-                    See All <i class="fas fa-arrow-right"></i>
-                </a>
+        <div class="col-lg-6">
+          <div class="weather-details-grid">
+            <div class="weather-detail">
+              <i class="fas fa-wind"></i>
+              <div class="detail-label">Wind</div>
+              <div class="detail-value">{{ weather.wind_speed }} mph</div>
             </div>
-
-            <div class="moments-grid">
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&h=800&fit=crop" alt="Sunny day" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-sun"></i> 75°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> San Diego, CA
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 234</span>
-                            <span><i class="fas fa-comment"></i> 12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=800&h=800&fit=crop" alt="Rainy day" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-cloud-rain"></i> 62°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> Seattle, WA
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 189</span>
-                            <span><i class="fas fa-comment"></i> 8</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=800&h=800&fit=crop" alt="Snowy mountains" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-snowflake"></i> 28°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> Aspen, CO
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 456</span>
-                            <span><i class="fas fa-comment"></i> 23</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=800&h=800&fit=crop" alt="Foggy morning" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-smog"></i> 58°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> San Francisco, CA
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 312</span>
-                            <span><i class="fas fa-comment"></i> 15</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1500740516770-92bd004b996e?w=800&h=800&fit=crop" alt="Stormy weather" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-bolt"></i> 68°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> Miami, FL
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 521</span>
-                            <span><i class="fas fa-comment"></i> 34</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="moment-card">
-                    <img src="https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&h=800&fit=crop" alt="Cloudy sunset" class="moment-image">
-                    <div class="moment-overlay">
-                        <div class="moment-info">
-                            <div class="moment-weather">
-                                <i class="fas fa-cloud-sun"></i> 71°F
-                            </div>
-                            <div class="moment-location">
-                                <i class="fas fa-map-marker-alt"></i> Portland, OR
-                            </div>
-                        </div>
-                        <div class="moment-stats">
-                            <span><i class="fas fa-heart"></i> 678</span>
-                            <span><i class="fas fa-comment"></i> 42</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="weather-detail">
+              <i class="fas fa-tint"></i>
+              <div class="detail-label">Humidity</div>
+              <div class="detail-value">{{ weather.humidity }}%</div>
             </div>
+            <div class="weather-detail">
+              <i class="fas fa-eye"></i>
+              <div class="detail-label">Visibility</div>
+              <div class="detail-value">{{ weather.visibility }} mi</div>
+            </div>
+            <div class="weather-detail">
+              <i class="fas fa-temperature-high"></i>
+              <div class="detail-label">Feels Like</div>
+              <div class="detail-value">{{ weather.feels_like }}°F</div>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Saved Locations -->
-    <section class="saved-locations-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Your Saved Locations</h2>
-                <a href="{% url 'locations' %}" class="btn-see-all">
-                    Manage <i class="fas fa-cog"></i>
-                </a>
-            </div>
-
-            <div class="locations-grid">
-                <div class="location-card">
-                    <div class="location-header">
-                        <h3>Los Angeles</h3>
-                        <i class="fas fa-heart location-favorite"></i>
-                    </div>
-                    <div class="location-weather">
-                        <i class="fas fa-sun"></i>
-                        <span class="location-temp">78°F</span>
-                    </div>
-                    <div class="location-condition">Clear Sky</div>
-                </div>
-
-                <div class="location-card">
-                    <div class="location-header">
-                        <h3>New York</h3>
-                        <i class="fas fa-heart location-favorite"></i>
-                    </div>
-                    <div class="location-weather">
-                        <i class="fas fa-cloud"></i>
-                        <span class="location-temp">64°F</span>
-                    </div>
-                    <div class="location-condition">Overcast</div>
-                </div>
-
-                <div class="location-card">
-                    <div class="location-header">
-                        <h3>Miami</h3>
-                        <i class="fas fa-heart location-favorite"></i>
-                    </div>
-                    <div class="location-weather">
-                        <i class="fas fa-cloud-sun"></i>
-                        <span class="location-temp">82°F</span>
-                    </div>
-                    <div class="location-condition">Partly Cloudy</div>
-                </div>
-
-                <div class="location-card add-location">
-                    <i class="fas fa-plus-circle"></i>
-                    <div>Add Location</div>
-                </div>
-            </div>
+      <!-- Music Player Bar -->
+      <div class="music-player">
+        <div class="music-info">
+          <i class="fas fa-music"></i>
+          <span id="music-title"
+            >Playing: {{ weather.condition }} Ambience</span
+          >
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container text-center">
-            <i class="fas fa-cloud-upload-alt cta-icon"></i>
-            <h2 class="cta-title">Share Your Weather Moment</h2>
-            <p class="cta-text">
-                Show the world what the weather looks like where you are. Upload photos and videos to connect with the community.
-            </p>
-            <a href="{% url 'upload' %}" class="btn-cta">
-                <i class="fas fa-upload"></i>
-                Start Sharing
-            </a>
+        <div class="music-controls">
+          <button class="music-btn">
+            <i class="fas fa-step-backward"></i>
+          </button>
+          <button class="music-btn music-play">
+            <i class="fas fa-play"></i>
+          </button>
+          <button class="music-btn"><i class="fas fa-step-forward"></i></button>
+          <button class="music-btn"><i class="fas fa-volume-up"></i></button>
         </div>
-    </section>
-{% endblock %}
+      </div>
+    </div>
 
-{% block js %}
-    <script src="{% static 'js/weather-music.js' %}"></script>
-    <script>
-        // Location search and weather functionality
-        const searchInput = document.querySelector('.hero-search input');
-        let searchTimeout;
+    {% else %}
+    <!-- No weather data - show loading or fallback -->
+    <div class="weather-widget text-center">
+      <div class="py-5">
+        <i
+          class="fas fa-cloud fa-4x text-muted mb-3"
+          style="color: #bdc3c7"
+        ></i>
+        <h3>Loading weather data...</h3>
+        <p class="text-muted">
+          Please wait while we fetch the latest weather information.
+        </p>
+        <div class="spinner-border text-primary mt-3" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
 
-        if (searchInput) {
-            searchInput.addEventListener('input', function() {
-                const query = this.value.trim();
-                
-                // Clear previous timeout
-                clearTimeout(searchTimeout);
-                
-                if (query.length < 2) return;
-                
-                // Debounce search - wait 500ms after user stops typing
-                searchTimeout = setTimeout(() => {
-                    searchLocation(query);
-                }, 500);
-            });
+<!-- 7-Day Forecast -->
+<section class="forecast-section">
+  <div class="container">
+    <h2 class="section-title">7-Day Forecast</h2>
+    {% if forecast %}
+    <div class="forecast-cards">
+      {% for day in forecast %}
+      <div class="forecast-card">
+        <div class="forecast-day">{{ day.day }}</div>
+        <i class="fas {{ day.icon }} forecast-icon"></i>
+        <div class="forecast-temp">{{ day.temp }}°</div>
+        <div class="forecast-condition">{{ day.condition }}</div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center text-muted">
+      <p>Forecast data unavailable</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
 
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const query = this.value.trim();
-                    if (query) {
-                        window.location.href = `/?city=${encodeURIComponent(query)}`;
-                    }
-                }
-            });
+<!-- Community Moments Section -->
+<section class="community-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Trending Weather Moments</h2>
+      <a href="{% url 'explore' %}" class="btn-see-all">
+        See All <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="moments-grid">
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&h=800&fit=crop"
+          alt="Sunny day"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather"><i class="fas fa-sun"></i> 75°F</div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> San Diego, CA
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 234</span>
+            <span><i class="fas fa-comment"></i> 12</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=800&h=800&fit=crop"
+          alt="Rainy day"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather">
+              <i class="fas fa-cloud-rain"></i> 62°F
+            </div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> Seattle, WA
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 189</span>
+            <span><i class="fas fa-comment"></i> 8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=800&h=800&fit=crop"
+          alt="Snowy mountains"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather">
+              <i class="fas fa-snowflake"></i> 28°F
+            </div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> Aspen, CO
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 456</span>
+            <span><i class="fas fa-comment"></i> 23</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?w=800&h=800&fit=crop"
+          alt="Foggy morning"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather"><i class="fas fa-smog"></i> 58°F</div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> San Francisco, CA
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 312</span>
+            <span><i class="fas fa-comment"></i> 15</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1500740516770-92bd004b996e?w=800&h=800&fit=crop"
+          alt="Stormy weather"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather"><i class="fas fa-bolt"></i> 68°F</div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> Miami, FL
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 521</span>
+            <span><i class="fas fa-comment"></i> 34</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment-card">
+        <img
+          src="https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&h=800&fit=crop"
+          alt="Cloudy sunset"
+          class="moment-image"
+        />
+        <div class="moment-overlay">
+          <div class="moment-info">
+            <div class="moment-weather">
+              <i class="fas fa-cloud-sun"></i> 71°F
+            </div>
+            <div class="moment-location">
+              <i class="fas fa-map-marker-alt"></i> Portland, OR
+            </div>
+          </div>
+          <div class="moment-stats">
+            <span><i class="fas fa-heart"></i> 678</span>
+            <span><i class="fas fa-comment"></i> 42</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Saved Locations -->
+<section class="saved-locations-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Your Saved Locations</h2>
+      <a href="{% url 'locations' %}" class="btn-see-all">
+        Manage <i class="fas fa-cog"></i>
+      </a>
+    </div>
+
+    <div class="locations-grid">
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Los Angeles</h3>
+          <i class="fas fa-heart location-favorite"></i>
+        </div>
+        <div class="location-weather">
+          <i class="fas fa-sun"></i>
+          <span class="location-temp">78°F</span>
+        </div>
+        <div class="location-condition">Clear Sky</div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>New York</h3>
+          <i class="fas fa-heart location-favorite"></i>
+        </div>
+        <div class="location-weather">
+          <i class="fas fa-cloud"></i>
+          <span class="location-temp">64°F</span>
+        </div>
+        <div class="location-condition">Overcast</div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header">
+          <h3>Miami</h3>
+          <i class="fas fa-heart location-favorite"></i>
+        </div>
+        <div class="location-weather">
+          <i class="fas fa-cloud-sun"></i>
+          <span class="location-temp">82°F</span>
+        </div>
+        <div class="location-condition">Partly Cloudy</div>
+      </div>
+
+      <div class="location-card add-location">
+        <i class="fas fa-plus-circle"></i>
+        <div>Add Location</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container text-center">
+    <i class="fas fa-cloud-upload-alt cta-icon"></i>
+    <h2 class="cta-title">Share Your Weather Moment</h2>
+    <p class="cta-text">
+      Show the world what the weather looks like where you are. Upload photos
+      and videos to connect with the community.
+    </p>
+    <a href="{% url 'upload' %}" class="btn-cta">
+      <i class="fas fa-upload"></i>
+      Start Sharing
+    </a>
+  </div>
+</section>
+{% endblock %} {% block js %}
+<script src="{% static 'js/weather-music.js' %}"></script>
+<script>
+  // Location search and weather functionality
+  const searchInput = document.querySelector(".hero-search input");
+  let searchTimeout;
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const query = this.value.trim();
+
+      // Clear previous timeout
+      clearTimeout(searchTimeout);
+
+      if (query.length < 2) return;
+
+      // Debounce search - wait 500ms after user stops typing
+      searchTimeout = setTimeout(() => {
+        searchLocation(query);
+      }, 500);
+    });
+
+    searchInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const query = this.value.trim();
+        if (query) {
+          window.location.href = `/?city=${encodeURIComponent(query)}`;
         }
+      }
+    });
+  }
 
-        function searchLocation(query) {
-            fetch(`/api/search/?q=${encodeURIComponent(query)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.results && data.results.length > 0) {
-                        showSearchResults(data.results);
-                    }
-                })
-                .catch(error => {
-                    console.error('Search error:', error);
-                });
+  function searchLocation(query) {
+    fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results && data.results.length > 0) {
+          showSearchResults(data.results);
         }
+      })
+      .catch((error) => {
+        console.error("Search error:", error);
+      });
+  }
 
-        function showSearchResults(results) {
-            // Create dropdown with search results
-            let dropdown = document.getElementById('search-dropdown');
-            
-            if (!dropdown) {
-                dropdown = document.createElement('div');
-                dropdown.id = 'search-dropdown';
-                dropdown.style.cssText = `
+  function showSearchResults(results) {
+    // Create dropdown with search results
+    let dropdown = document.getElementById("search-dropdown");
+
+    if (!dropdown) {
+      dropdown = document.createElement("div");
+      dropdown.id = "search-dropdown";
+      dropdown.style.cssText = `
                     position: absolute;
                     top: 100%;
                     left: 0;
@@ -397,80 +428,92 @@
                     overflow-y: auto;
                     z-index: 1000;
                 `;
-                document.querySelector('.hero-search').style.position = 'relative';
-                document.querySelector('.hero-search').appendChild(dropdown);
-            }
+      document.querySelector(".hero-search").style.position = "relative";
+      document.querySelector(".hero-search").appendChild(dropdown);
+    }
 
-            dropdown.innerHTML = results.map(result => `
+    dropdown.innerHTML = results
+      .map(
+        (result) => `
                 <div class="search-result-item" style="padding: 1rem; cursor: pointer; border-bottom: 1px solid #eee;" 
-                     onclick="window.location.href='/?city=${encodeURIComponent(result.name)}'">
-                    <div style="font-weight: 600; color: #2c3e50;">${result.name}</div>
-                    <div style="font-size: 0.9rem; color: #7f8c8d;">${result.state ? result.state + ', ' : ''}${result.country}</div>
+                     onclick="window.location.href='/?city=${encodeURIComponent(
+                       result.name
+                     )}'">
+                    <div style="font-weight: 600; color: #2c3e50;">${
+                      result.name
+                    }</div>
+                    <div style="font-size: 0.9rem; color: #7f8c8d;">${
+                      result.state ? result.state + ", " : ""
+                    }${result.country}</div>
                 </div>
-            `).join('');
+            `
+      )
+      .join("");
 
-            // Add hover effect
-            document.querySelectorAll('.search-result-item').forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.background = '#f8f9fa';
-                });
-                item.addEventListener('mouseleave', function() {
-                    this.style.background = 'white';
-                });
-            });
+    // Add hover effect
+    document.querySelectorAll(".search-result-item").forEach((item) => {
+      item.addEventListener("mouseenter", function () {
+        this.style.background = "#f8f9fa";
+      });
+      item.addEventListener("mouseleave", function () {
+        this.style.background = "white";
+      });
+    });
 
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function closeDropdown(e) {
-                if (!document.querySelector('.hero-search').contains(e.target)) {
-                    if (dropdown) dropdown.remove();
-                    document.removeEventListener('click', closeDropdown);
-                }
-            });
-        }
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function closeDropdown(e) {
+      if (!document.querySelector(".hero-search").contains(e.target)) {
+        if (dropdown) dropdown.remove();
+        document.removeEventListener("click", closeDropdown);
+      }
+    });
+  }
 
-        // Moment card hover effect - show overlay on hover
-        document.querySelectorAll('.moment-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.querySelector('.moment-overlay').style.opacity = '1';
-            });
-            card.addEventListener('mouseleave', function() {
-                this.querySelector('.moment-overlay').style.opacity = '0';
-            });
-        });
+  // Moment card hover effect - show overlay on hover
+  document.querySelectorAll(".moment-card").forEach((card) => {
+    card.addEventListener("mouseenter", function () {
+      this.querySelector(".moment-overlay").style.opacity = "1";
+    });
+    card.addEventListener("mouseleave", function () {
+      this.querySelector(".moment-overlay").style.opacity = "0";
+    });
+  });
 
-        // Add click handler to location cards
-        document.querySelectorAll('.location-card:not(.add-location)').forEach(card => {
-            card.addEventListener('click', function() {
-                const location = this.querySelector('h3').textContent;
-                console.log('Clicked location:', location);
-                // Redirect to home with city parameter
-                window.location.href = `/?city=${encodeURIComponent(location)}`;
-            });
-        });
+  // Add click handler to location cards
+  document
+    .querySelectorAll(".location-card:not(.add-location)")
+    .forEach((card) => {
+      card.addEventListener("click", function () {
+        const location = this.querySelector("h3").textContent;
+        console.log("Clicked location:", location);
+        // Redirect to home with city parameter
+        window.location.href = `/?city=${encodeURIComponent(location)}`;
+      });
+    });
 
-        // Add location button
-        const addLocationBtn = document.querySelector('.add-location');
-        if (addLocationBtn) {
-            addLocationBtn.addEventListener('click', function() {
-                const city = prompt('Enter city name:');
-                if (city) {
-                    window.location.href = `/?city=${encodeURIComponent(city)}`;
-                }
-            });
-        }
+  // Add location button
+  const addLocationBtn = document.querySelector(".add-location");
+  if (addLocationBtn) {
+    addLocationBtn.addEventListener("click", function () {
+      const city = prompt("Enter city name:");
+      if (city) {
+        window.location.href = `/?city=${encodeURIComponent(city)}`;
+      }
+    });
+  }
 
-        // Refresh weather every 10 minutes
-        setInterval(() => {
-            location.reload();
-        }, 600000);
+  // Refresh weather every 10 minutes
+  setInterval(() => {
+    location.reload();
+  }, 600000);
 
-        // Initialize music player notification
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show a subtle notification about music
-            const musicPlayer = document.querySelector('.music-player');
-            if (musicPlayer && !sessionStorage.getItem('musicNotificationShown')) {
-                const notification = document.createElement('div');
-                notification.style.cssText = `
+  // Initialize music player notification
+  document.addEventListener("DOMContentLoaded", function () {
+    // Show a subtle notification about music
+    const musicPlayer = document.querySelector(".music-player");
+    if (musicPlayer && !sessionStorage.getItem("musicNotificationShown")) {
+      const notification = document.createElement("div");
+      notification.style.cssText = `
                     position: fixed;
                     bottom: 20px;
                     right: 20px;
@@ -482,7 +525,7 @@
                     z-index: 10000;
                     animation: slideIn 0.5s ease;
                 `;
-                notification.innerHTML = `
+      notification.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <i class="fas fa-music" style="font-size: 1.5rem;"></i>
                         <div>
@@ -496,42 +539,89 @@
                         </button>
                     </div>
                 `;
-                
-                document.body.appendChild(notification);
-                sessionStorage.setItem('musicNotificationShown', 'true');
-                
-                // Auto-remove after 10 seconds
-                setTimeout(() => {
-                    if (notification.parentElement) {
-                        notification.style.animation = 'slideOut 0.5s ease';
-                        setTimeout(() => notification.remove(), 500);
-                    }
-                }, 10000);
-            }
-        });
-    </script>
-    
-    <style>
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+
+      document.body.appendChild(notification);
+      sessionStorage.setItem("musicNotificationShown", "true");
+
+      // Auto-remove after 10 seconds
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.style.animation = "slideOut 0.5s ease";
+          setTimeout(() => notification.remove(), 500);
         }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-    </style>
+      }, 10000);
+    }
+  });
+</script>
+
+<script>
+  let audioPlayer = null;
+  let isPlaying = false;
+
+  // Music for different weather
+  const weatherMusic = {
+    rain: "https://assets.mixkit.co/music/preview/mixkit-sleepy-cat-135.mp3",
+    snow: "https://assets.mixkit.co/music/preview/mixkit-cold-nights-14.mp3",
+    clear: "https://assets.mixkit.co/music/preview/mixkit-sunny-morning-12.mp3",
+    default:
+      "https://assets.mixkit.co/music/preview/mixkit-a-very-happy-christmas-897.mp3",
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get weather from page
+    const weatherText =
+      document.querySelector(".weather-condition")?.textContent.toLowerCase() ||
+      "";
+
+    // Pick music based on weather
+    let musicUrl = weatherMusic.default;
+    if (weatherText.includes("rain")) musicUrl = weatherMusic.rain;
+    else if (weatherText.includes("snow")) musicUrl = weatherMusic.snow;
+    else if (weatherText.includes("clear") || weatherText.includes("sun"))
+      musicUrl = weatherMusic.clear;
+
+    // Create audio player
+    audioPlayer = new Audio(musicUrl);
+    audioPlayer.loop = true;
+    audioPlayer.volume = 0.5;
+
+    // Play button
+    const playBtn = document.querySelector(".music-play");
+    playBtn?.addEventListener("click", function () {
+      if (isPlaying) {
+        audioPlayer.pause();
+        this.innerHTML = '<i class="fas fa-play"></i>';
+        isPlaying = false;
+      } else {
+        audioPlayer.play();
+        this.innerHTML = '<i class="fas fa-pause"></i>';
+        isPlaying = true;
+      }
+    });
+  });
+</script>
+
+<style>
+  @keyframes slideIn {
+    from {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(400px);
+      opacity: 0;
+    }
+  }
+</style>
 {% endblock %}

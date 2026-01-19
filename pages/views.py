@@ -6,6 +6,9 @@ from datetime import datetime
 
 from notes.models import Note
 
+from django.core.mail import send_mail
+from django.conf import settings
+
 # ==================== EXISTING VIEWS ====================
 def home_view(request):
     return render(request, 'pages/home.html')
@@ -28,6 +31,64 @@ def note_details_view(request, note_id):
 
 def community_view(request):
     return render(request, 'pages/community.html')
+
+def contact_view(request):
+    """Contact page with form submission"""
+    
+    if request.method == 'POST':
+        # Get form data
+        name = request.POST.get('name', '')
+        email = request.POST.get('email', '')
+        subject = request.POST.get('subject', '')
+        message = request.POST.get('message', '')
+        
+        # Validate data
+        if not all([name, email, subject, message]):
+            return JsonResponse({
+                'success': False,
+                'message': 'Please fill in all required fields.'
+            })
+        
+        # Compose email
+        full_message = f"""
+New Contact Form Submission from Clearview
+
+From: {name}
+Email: {email}
+Subject: {subject}
+
+Message:
+{message}
+
+---
+Sent from Clearview Contact Form
+        """
+        
+        try:
+            # Send email (configure in settings.py)
+            send_mail(
+                subject=f'Clearview Contact: {subject}',
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.CONTACT_EMAIL],
+                fail_silently=False,
+            )
+            
+            # Return success response
+            return JsonResponse({
+                'success': True,
+                'message': 'Thank you! Your message has been sent successfully.'
+            })
+            
+        except Exception as e:
+            print(f"Email error: {e}")
+            return JsonResponse({
+                'success': False,
+                'message': 'An error occurred while sending your message. Please try again.'
+            })
+    
+    # GET request - show the form
+    return render(request, 'pages/contact.html')
 
 # ==================== HELPER FUNCTIONS ====================
 def get_weather_icon(weather_code, is_day=True):

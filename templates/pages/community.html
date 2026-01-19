@@ -1,0 +1,457 @@
+{% extends 'base.html' %}
+
+{% block title %}Community - Clearview{% endblock %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/community.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="community-hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="page-title">Community</h1>
+            <p class="page-subtitle">Connect with weather enthusiasts around the world</p>
+            
+            <!-- Quick Stats -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Moments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="community-content">
+        <div class="container">
+            <div class="row">
+                <!-- Main Feed (Left Side) -->
+                <div class="col-lg-8">
+                    <!-- Feed Tabs -->
+                    <div class="feed-tabs">
+                        <button class="tab-btn active" data-tab="following">
+                            <i class="fas fa-user-friends"></i> Following
+                        </button>
+                        <button class="tab-btn" data-tab="trending">
+                            <i class="fas fa-fire"></i> Trending
+                        </button>
+                        <button class="tab-btn" data-tab="recent">
+                            <i class="fas fa-clock"></i> Recent
+                        </button>
+                        <button class="tab-btn" data-tab="nearby">
+                            <i class="fas fa-map-marker-alt"></i> Nearby
+                        </button>
+                    </div>
+
+                    <!-- Feed Posts -->
+                    <div class="feed-container" id="feedContainer">
+                        <!-- Post 1 -->
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="User" class="post-avatar">
+                                <div class="post-user-info">
+                                    <h4 class="post-username">@sarah_travels</h4>
+                                    <div class="post-meta">
+                                        <i class="fas fa-map-marker-alt"></i> Malibu, CA
+                                        <span>•</span>
+                                        <i class="far fa-clock"></i> 2 hours ago
+                                    </div>
+                                </div>
+                                <button class="btn-follow">
+                                    <i class="fas fa-user-plus"></i> Follow
+                                </button>
+                            </div>
+
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1601297183305-6df142704ea2?w=800&h=600&fit=crop" alt="Weather moment">
+                                <div class="weather-badge sunny">
+                                    <i class="fas fa-sun"></i> 78°F
+                                </div>
+                            </div>
+
+                            <div class="post-content">
+                                <p class="post-caption">Perfect beach day! ☀️🌊 The weather couldn't be better for surfing.</p>
+                                <div class="post-hashtags">
+                                    <span class="hashtag">#sunny</span>
+                                    <span class="hashtag">#california</span>
+                                    <span class="hashtag">#beach</span>
+                                </div>
+                            </div>
+
+                            <div class="post-actions">
+                                <button class="action-btn like-btn">
+                                    <i class="far fa-heart"></i>
+                                    <span>1.2k</span>
+                                </button>
+                                <button class="action-btn comment-btn">
+                                    <i class="far fa-comment"></i>
+                                    <span>89</span>
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>45</span>
+                                </button>
+                                <button class="action-btn bookmark-btn">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Post 2 -->
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="User" class="post-avatar">
+                                <div class="post-user-info">
+                                    <h4 class="post-username">@rainylover</h4>
+                                    <div class="post-meta">
+                                        <i class="fas fa-map-marker-alt"></i> Seattle, WA
+                                        <span>•</span>
+                                        <i class="far fa-clock"></i> 5 hours ago
+                                    </div>
+                                </div>
+                                <button class="btn-follow following">
+                                    <i class="fas fa-check"></i> Following
+                                </button>
+                            </div>
+
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1519692933481-e162a57d6721?w=800&h=600&fit=crop" alt="Weather moment">
+                                <div class="weather-badge rainy">
+                                    <i class="fas fa-cloud-rain"></i> 55°F
+                                </div>
+                            </div>
+
+                            <div class="post-content">
+                                <p class="post-caption">Cozy rainy afternoon with coffee ☕🌧️ Nothing beats the sound of rain on windows.</p>
+                                <div class="post-hashtags">
+                                    <span class="hashtag">#rainy</span>
+                                    <span class="hashtag">#seattle</span>
+                                    <span class="hashtag">#cozy</span>
+                                </div>
+                            </div>
+
+                            <div class="post-actions">
+                                <button class="action-btn like-btn liked">
+                                    <i class="fas fa-heart"></i>
+                                    <span>856</span>
+                                </button>
+                                <button class="action-btn comment-btn">
+                                    <i class="far fa-comment"></i>
+                                    <span>34</span>
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>12</span>
+                                </button>
+                                <button class="action-btn bookmark-btn bookmarked">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Post 3 -->
+                        <div class="post-card">
+                            <div class="post-header">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="User" class="post-avatar">
+                                <div class="post-user-info">
+                                    <h4 class="post-username">@mountain_mike</h4>
+                                    <div class="post-meta">
+                                        <i class="fas fa-map-marker-alt"></i> Aspen, CO
+                                        <span>•</span>
+                                        <i class="far fa-clock"></i> 1 day ago
+                                    </div>
+                                </div>
+                                <button class="btn-follow">
+                                    <i class="fas fa-user-plus"></i> Follow
+                                </button>
+                            </div>
+
+                            <div class="post-image">
+                                <img src="https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=800&h=600&fit=crop" alt="Weather moment">
+                                <div class="weather-badge snowy">
+                                    <i class="fas fa-snowflake"></i> 22°F
+                                </div>
+                            </div>
+
+                            <div class="post-content">
+                                <p class="post-caption">Fresh powder! Best skiing conditions ⛷️❄️ The mountain is calling!</p>
+                                <div class="post-hashtags">
+                                    <span class="hashtag">#snow</span>
+                                    <span class="hashtag">#skiing</span>
+                                    <span class="hashtag">#mountains</span>
+                                </div>
+                            </div>
+
+                            <div class="post-actions">
+                                <button class="action-btn like-btn">
+                                    <i class="far fa-heart"></i>
+                                    <span>2.4k</span>
+                                </button>
+                                <button class="action-btn comment-btn">
+                                    <i class="far fa-comment"></i>
+                                    <span>156</span>
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="far fa-share-square"></i>
+                                    <span>89</span>
+                                </button>
+                                <button class="action-btn bookmark-btn">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Load More Button -->
+                        <div class="text-center mt-4">
+                            <button class="btn-load-more">
+                                <i class="fas fa-arrow-down"></i>
+                                Load More Posts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar (Right Side) -->
+                <div class="col-lg-4">
+                    <!-- Suggested Users -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-user-plus"></i>
+                            Suggested Users
+                        </h3>
+
+                        <div class="suggested-user">
+                            <img src="https://i.pravatar.cc/150?img=10" alt="User" class="suggested-avatar">
+                            <div class="suggested-info">
+                                <h4>@weather_pro</h4>
+                                <p>Weather photographer</p>
+                            </div>
+                            <button class="btn-follow-small">Follow</button>
+                        </div>
+
+                        <div class="suggested-user">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="User" class="suggested-avatar">
+                            <div class="suggested-info">
+                                <h4>@storm_chaser</h4>
+                                <p>Extreme weather</p>
+                            </div>
+                            <button class="btn-follow-small">Follow</button>
+                        </div>
+
+                        <div class="suggested-user">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="User" class="suggested-avatar">
+                            <div class="suggested-info">
+                                <h4>@cloud_hunter</h4>
+                                <p>Cloud formations</p>
+                            </div>
+                            <button class="btn-follow-small">Follow</button>
+                        </div>
+
+                        <a href="#" class="view-all-link">View All Suggestions →</a>
+                    </div>
+
+                    <!-- Trending Hashtags -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-hashtag"></i>
+                            Trending Hashtags
+                        </h3>
+
+                        <div class="trending-hashtag">
+                            <span class="hashtag-name">#sunny</span>
+                            <span class="hashtag-count">12.5K posts</span>
+                        </div>
+
+                        <div class="trending-hashtag">
+                            <span class="hashtag-name">#rainy</span>
+                            <span class="hashtag-count">8.3K posts</span>
+                        </div>
+
+                        <div class="trending-hashtag">
+                            <span class="hashtag-name">#snow</span>
+                            <span class="hashtag-count">6.7K posts</span>
+                        </div>
+
+                        <div class="trending-hashtag">
+                            <span class="hashtag-name">#storm</span>
+                            <span class="hashtag-count">5.2K posts</span>
+                        </div>
+
+                        <div class="trending-hashtag">
+                            <span class="hashtag-name">#sunset</span>
+                            <span class="hashtag-count">4.8K posts</span>
+                        </div>
+                    </div>
+
+                    <!-- Community Guidelines -->
+                    <div class="sidebar-card guidelines">
+                        <h3 class="sidebar-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Community Guidelines
+                        </h3>
+                        <ul class="guidelines-list">
+                            <li>Share authentic weather moments</li>
+                            <li>Be respectful and kind</li>
+                            <li>No spam or promotional content</li>
+                            <li>Report inappropriate content</li>
+                        </ul>
+                        <a href="{% url 'about' %}" class="guidelines-link">Read Full Guidelines →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // Tab switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Get tab type
+                const tabType = this.dataset.tab;
+                console.log('Switched to:', tabType);
+                
+                // In production, fetch posts for this tab
+                // fetchPosts(tabType);
+            });
+        });
+
+        // Like button functionality
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const count = this.querySelector('span');
+                let currentCount = parseInt(count.textContent.replace('k', '00').replace('.', ''));
+                
+                if (this.classList.contains('liked')) {
+                    // Unlike
+                    this.classList.remove('liked');
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    currentCount--;
+                } else {
+                    // Like
+                    this.classList.add('liked');
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    currentCount++;
+                    
+                    // Animate
+                    icon.style.animation = 'heartBeat 0.5s ease';
+                    setTimeout(() => {
+                        icon.style.animation = '';
+                    }, 500);
+                }
+                
+                // Update count
+                if (currentCount >= 1000) {
+                    count.textContent = (currentCount / 1000).toFixed(1) + 'k';
+                } else {
+                    count.textContent = currentCount;
+                }
+            });
+        });
+
+        // Bookmark button functionality
+        document.querySelectorAll('.bookmark-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                
+                if (this.classList.contains('bookmarked')) {
+                    this.classList.remove('bookmarked');
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                } else {
+                    this.classList.add('bookmarked');
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                }
+            });
+        });
+
+        // Follow button functionality
+        document.querySelectorAll('.btn-follow, .btn-follow-small').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('following')) {
+                    // Unfollow
+                    this.classList.remove('following');
+                    this.innerHTML = '<i class="fas fa-user-plus"></i> Follow';
+                } else {
+                    // Follow
+                    this.classList.add('following');
+                    this.innerHTML = '<i class="fas fa-check"></i> Following';
+                }
+            });
+        });
+
+        // Comment button (placeholder)
+        document.querySelectorAll('.comment-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('Open comments modal');
+                // In production, open comments modal or navigate to post detail
+            });
+        });
+
+        // Share button
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Clearview Weather Moment',
+                        text: 'Check out this weather moment on Clearview!',
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback: copy link
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Link copied to clipboard!');
+                }
+            });
+        });
+
+        // Load more posts
+        document.querySelector('.btn-load-more')?.addEventListener('click', function() {
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            // Simulate loading
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-arrow-down"></i> Load More Posts';
+                console.log('Load more posts');
+                // In production, fetch and append more posts
+            }, 1000);
+        });
+
+        // Heart animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes heartBeat {
+                0%, 100% { transform: scale(1); }
+                25% { transform: scale(1.3); }
+                50% { transform: scale(1.1); }
+                75% { transform: scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+{% endblock %}

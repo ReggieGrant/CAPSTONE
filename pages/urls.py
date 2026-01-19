@@ -9,6 +9,7 @@ urlpatterns = [
     path('upload/', views.upload_view, name='upload'),
     path('about/', views.about_view, name='about'),
     path('community/', views.community_view, name='community'),
+    path('contact/', views.contact_view, name='contact'),
     
     # API endpoints
     path('api/weather/', views.get_weather_api, name='get_weather'),

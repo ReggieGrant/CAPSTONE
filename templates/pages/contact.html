@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - Clearview{% endblock %}
+
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="page-title">Get in Touch</h1>
+            <p class="page-subtitle">We'd love to hear from you</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form-wrapper">
+                        <h2 class="form-title">Send us a Message</h2>
+                        <p class="form-subtitle">Have a question, suggestion, or just want to say hi? Fill out the form below and we'll get back to you as soon as possible.</p>
+
+                        <form class="contact-form" id="contactForm" method="POST" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            
+                            <!-- Success/Error Messages -->
+                            <div id="formMessage" class="form-message" style="display: none;"></div>
+
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">
+                                            <i class="fas fa-user"></i> Your Name
+                                        </label>
+                                        <input 
+                                            type="text" 
+                                            class="form-control" 
+                                            id="name" 
+                                            name="name" 
+                                            placeholder="John Doe" 
+                                            required
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">
+                                            <i class="fas fa-envelope"></i> Email Address
+                                        </label>
+                                        <input 
+                                            type="email" 
+                                            class="form-control" 
+                                            id="email" 
+                                            name="email" 
+                                            placeholder="john@example.com" 
+                                            required
+                                        >
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="subject">
+                                            <i class="fas fa-tag"></i> Subject
+                                        </label>
+                                        <select class="form-control" id="subject" name="subject" required>
+                                            <option value="">Choose a topic...</option>
+                                            <option value="general">General Inquiry</option>
+                                            <option value="support">Technical Support</option>
+                                            <option value="feedback">Feedback</option>
+                                            <option value="feature">Feature Request</option>
+                                            <option value="bug">Report a Bug</option>
+                                            <option value="partnership">Partnership Opportunity</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="message">
+                                            <i class="fas fa-comment-dots"></i> Message
+                                        </label>
+                                        <textarea 
+                                            class="form-control" 
+                                            id="message" 
+                                            name="message" 
+                                            rows="6" 
+                                            placeholder="Tell us what's on your mind..." 
+                                            required
+                                        ></textarea>
+                                        <div class="character-count">
+                                            <span id="charCount">0</span> / 1000 characters
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn-submit">
+                                        <i class="fas fa-paper-plane"></i>
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Info Sidebar -->
+                <div class="col-lg-5">
+                    <div class="contact-info">
+                        <h3>Other Ways to Reach Us</h3>
+
+                        <div class="info-card">
+                            <div class="info-icon email">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email Us</h4>
+                                <p>support@clearview.com</p>
+                                <small>We typically respond within 24 hours</small>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon social">
+                                <i class="fas fa-hashtag"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Social Media</h4>
+                                <div class="social-links">
+                                    <a href="#" class="social-link twitter">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="social-link instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="social-link facebook">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a href="#" class="social-link linkedin">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                                <small>Follow us for updates</small>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon location">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Location</h4>
+                                <p>Temecula, California<br>United States</p>
+                                <small>Remote-first team</small>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-icon time">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Support Hours</h4>
+                                <p>Monday - Friday<br>9:00 AM - 5:00 PM PST</p>
+                                <small>24/7 community support</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Quick Links -->
+                    <div class="faq-box">
+                        <h4>
+                            <i class="fas fa-question-circle"></i>
+                            Frequently Asked Questions
+                        </h4>
+                        <p>Check out our FAQ section for quick answers to common questions.</p>
+                        <a href="{% url 'about' %}#faq" class="btn-faq">
+                            View FAQ
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section (Optional) -->
+    <section class="map-section">
+        <div class="container">
+            <div class="map-placeholder">
+                <i class="fas fa-globe-americas"></i>
+                <h3>We're a Global Community</h3>
+                <p>Connecting weather enthusiasts from around the world</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script>
+        // Character counter for message textarea
+        const messageTextarea = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        const maxChars = 1000;
+
+        if (messageTextarea && charCount) {
+            messageTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.textContent = currentLength;
+                
+                if (currentLength > maxChars) {
+                    this.value = this.value.substring(0, maxChars);
+                    charCount.textContent = maxChars;
+                }
+                
+                // Change color if approaching limit
+                if (currentLength > maxChars * 0.9) {
+                    charCount.style.color = '#e74c3c';
+                } else {
+                    charCount.style.color = '#7f8c8d';
+                }
+            });
+        }
+
+        // Form submission handler
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.btn-submit');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.disabled = true;
+                
+                // Simulate form submission (replace with actual AJAX call)
+                setTimeout(() => {
+                    // Show success message
+                    formMessage.className = 'form-message success';
+                    formMessage.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We\'ll get back to you soon!';
+                    formMessage.style.display = 'block';
+                    
+                    // Reset form
+                    contactForm.reset();
+                    charCount.textContent = '0';
+                    
+                    // Reset button
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Scroll to message
+                    formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+                }, 1500);
+                
+                // In production, replace above with actual form submission:
+                /*
+                fetch('{% url "contact" %}', {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        formMessage.className = 'form-message success';
+                        formMessage.innerHTML = '<i class="fas fa-check-circle"></i> ' + data.message;
+                    } else {
+                        formMessage.className = 'form-message error';
+                        formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + data.message;
+                    }
+                    formMessage.style.display = 'block';
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    formMessage.className = 'form-message error';
+                    formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> An error occurred. Please try again.';
+                    formMessage.style.display = 'block';
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+                */
+            });
+        }
+
+        // Add smooth animations to info cards
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.info-card, .faq-box').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+{% endblock %}
