@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Clearview - My Locations{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+<link rel="stylesheet" href="{% static 'css/locations.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="hero-section locations-header">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <h1 class="hero-title">My Locations</h1>
+        <p class="hero-tagline">Manage and track weather across your favorite cities</p>
+    </div>
+</section>
+
+<section class="saved-locations-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Saved Places</h2>
+            <div class="location-actions">
+                <span class="text-muted me-3">You have {{ locations|length|default:"3" }} saved locations</span>
+            </div>
+        </div>
+
+        <div class="locations-grid">
+            <div class="location-card manage-card">
+                <div class="location-header">
+                    <h3>Los Angeles</h3>
+                    <button class="btn-remove-location" title="Remove Location">
+                        <i class="fas fa-heart-broken"></i>
+                    </button>
+                </div>
+                <div class="location-weather" onclick="window.location.href='/?city=Los%20Angeles'">
+                    <i class="fas fa-sun"></i>
+                    <span class="location-temp">78°F</span>
+                </div>
+                <div class="location-condition">Clear Sky</div>
+                <div class="location-footer">
+                    <small><i class="far fa-clock"></i> Local Time: 12:30 PM</small>
+                </div>
+            </div>
+
+            <div class="location-card manage-card">
+                <div class="location-header">
+                    <h3>New York</h3>
+                    <button class="btn-remove-location" title="Remove Location">
+                        <i class="fas fa-heart-broken"></i>
+                    </button>
+                </div>
+                <div class="location-weather" onclick="window.location.href='/?city=New%20York'">
+                    <i class="fas fa-cloud"></i>
+                    <span class="location-temp">64°F</span>
+                </div>
+                <div class="location-condition">Overcast</div>
+                <div class="location-footer">
+                    <small><i class="far fa-clock"></i> Local Time: 3:30 PM</small>
+                </div>
+            </div>
+
+            <div class="location-card add-location" onclick="triggerSearchFocus()">
+                <i class="fas fa-plus-circle"></i>
+                <div>Add New City</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container text-center">
+        <h2 class="cta-title">Find a New Place</h2>
+        <p class="cta-text">Enter a city name to see the current weather and add it to your list.</p>
+        <div class="hero-search" style="max-width: 500px;">
+            <i class="fas fa-search"></i>
+            <input type="text" id="location-search-input" placeholder="Search and add location..." />
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    function triggerSearchFocus() {
+        document.getElementById('location-search-input').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('location-search-input').focus();
+    }
+
+    // Logic for the remove buttons
+    document.querySelectorAll('.btn-remove-location').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent navigation
+            if(confirm("Remove this location from your favorites?")) {
+                this.closest('.location-card').style.opacity = '0';
+                setTimeout(() => this.closest('.location-card').remove(), 300);
+            }
+        });
+    });
+</script>
+{% endblock %}

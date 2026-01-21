@@ -1,35 +1,65 @@
 <nav class="navbar navbar-dark bg-dark py-3">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center justify-content-between w-100">
-                <a href="#" class="navbar-brand">
-                    <i class="fas fa-cloud fa-2x text-primary me-2"></i>
-                    Clearview
-                </a>
+  <div class="container-fluid">
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <a href="{% url 'home' %}" class="navbar-brand">
+        <i class="fas fa-cloud fa-2x text-primary me-2"></i>
+        Clearview
+      </a>
 
-                <ul class="desktop-nav-items" role="menubar">
-                    <li role="none"><a href="{% url 'home' %}" class="desktop-nav-link active" role="menuitem"><i class="fas fa-home"></i> Home</a></li>
-                    <li role="none"><a href="{% url 'explore' %}" class="desktop-nav-link" role="menuitem"><i class="fas fa-images"></i> Explore</a></li>
-                    <li role="none"><a href="{% url 'locations' %}" class="desktop-nav-link" role="menuitem"><i class="fas fa-map-marked-alt"></i> Locations</a></li>
-                    <li role="none"><a href="{% url 'community' %}" class="desktop-nav-link" role="menuitem"><i class="fas fa-users"></i> Community</a></li>
-                </ul>
+      <ul class="desktop-nav-items" role="menubar">
+        <li role="none">
+          <a
+            href="{% url 'home' %}"
+            class="desktop-nav-link active"
+            role="menuitem"
+            ><i class="fas fa-home"></i> Home</a
+          >
+        </li>
+        <li role="none">
+          <a href="{% url 'explore' %}" class="desktop-nav-link" role="menuitem"
+            ><i class="fas fa-images"></i> Explore</a
+          >
+        </li>
+        <li role="none">
+          <a
+            href="{% url 'locations' %}"
+            class="desktop-nav-link"
+            role="menuitem"
+            ><i class="fas fa-map-marked-alt"></i> Locations</a
+          >
+        </li>
+        <li role="none">
+          <a
+            href="{% url 'community' %}"
+            class="desktop-nav-link"
+            role="menuitem"
+            ><i class="fas fa-users"></i> Community</a
+          >
+        </li>
+      </ul>
 
-                <div class="d-flex align-items-center">
-                    <div class="desktop-search">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search location...">
-                    </div>
-
-                    <a href="#" class="btn-upload-desktop">
-                        <i class="fas fa-upload"></i>
-                        Share Moment
-                    </a>
-
-                    <div class="user-menu ms-3">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div class="d-flex align-items-center">
+        <div class="desktop-search">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search location..." />
         </div>
-    </nav>
+
+        <a href="{% url 'login' %}" class="btn-login-desktop me-2">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+
+        <a href="{% url 'upload' %}" class="btn-upload-desktop">
+          <i class="fas fa-upload"></i>
+          Share Moment
+        </a>
+
+        <div class="user-menu ms-3">
+          <div class="user-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

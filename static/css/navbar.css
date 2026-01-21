@@ -1,164 +1,197 @@
 :root {
-            --nav-bg: rgba(255, 255, 255, 0.95);
-            --nav-text: #2c3e50;
-            --nav-hover: #3498db;
-            --nav-active: #2980b9;
-            --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-text: #2c3e50;
+  --nav-hover: #3498db;
+  --nav-active: #2980b9;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            padding-top: 76px;
-        }
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  padding-top: 76px;
+}
 
-        /* ==================== DESKTOP NAVBAR ==================== */
-        .navbar-desktop {
-            background: var(--nav-bg);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow);
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
+/* ==================== DESKTOP NAVBAR ==================== */
+.navbar-desktop {
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
 
-        .navbar-desktop .container-fluid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+.navbar-desktop .container-fluid {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-        .navbar-brand {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--nav-text) !important;
-            letter-spacing: -0.5px;
-            transition: color 0.3s ease;
-            text-decoration: none;
-        }
+.navbar-brand {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--nav-text) !important;
+  letter-spacing: -0.5px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
 
-        .navbar-brand:hover {
-            color: var(--nav-hover) !important;
-        }
+.navbar-brand:hover {
+  color: var(--nav-hover) !important;
+}
 
-        .navbar-brand i {
-            margin-right: 0.75rem;
-            font-size: 1.5rem;
-        }
+.navbar-brand i {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+}
 
-        .desktop-nav-items {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
+.desktop-nav-items {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
-        .desktop-nav-link {
-            color: var(--nav-text);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem 1.25rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem;
-        }
+.desktop-nav-link {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
 
-        .desktop-nav-link:hover {
-            background: rgba(52, 152, 219, 0.1);
-            color: var(--nav-hover);
-        }
+.desktop-nav-link:hover {
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--nav-hover);
+}
 
-        .desktop-nav-link.active {
-            background: rgba(52, 152, 219, 0.15);
-            color: var(--nav-active);
-            font-weight: 600;
-        }
+.desktop-nav-link.active {
+  background: rgba(52, 152, 219, 0.15);
+  color: var(--nav-active);
+  font-weight: 600;
+}
 
-        .desktop-search {
-            position: relative;
-            width: 350px;
-            margin: 0 1rem;
-        }
+.desktop-search {
+  position: relative;
+  width: 350px;
+  margin: 0 1rem;
+}
 
-        .desktop-search input {
-            width: 100%;
-            border: 2px solid #e0e0e0;
-            border-radius: 25px;
-            padding: 0.75rem 1.25rem 0.75rem 3rem;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
+.desktop-search input {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  padding: 0.75rem 1.25rem 0.75rem 3rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
 
-        .desktop-search input:focus {
-            outline: none;
-            border-color: var(--nav-hover);
-            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
-        }
+.desktop-search input:focus {
+  outline: none;
+  border-color: var(--nav-hover);
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+}
 
-        .desktop-search i {
-            position: absolute;
-            left: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 1rem;
-        }
+.desktop-search i {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1rem;
+}
 
-        .btn-upload-desktop {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.75rem;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            font-size: 1rem;
-            white-space: nowrap;
-        }
+.btn-upload-desktop {
+  background: var(--gradient);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
 
-        .btn-upload-desktop:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-            color: white;
-        }
+.btn-upload-desktop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  color: white;
+}
 
-        .user-menu {
-            position: relative;
-        }
+.user-menu {
+  position: relative;
+}
 
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
-        .user-avatar:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
+.user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ==================== LOGIN BUTTON STYLES ==================== */
+.btn-login-desktop {
+  background: transparent;
+  color: var(--nav-text);
+  border: 2px solid #e0e0e0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.btn-login-desktop:hover {
+  border-color: #667eea;
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+  transform: translateY(-2px);
+}
+
+/* Ensure spacing on smaller screens */
+@media (max-width: 1200px) {
+  .desktop-search {
+    width: 200px; /* Shrink search to fit buttons */
+  }
+}

@@ -1,0 +1,54 @@
+/* Specific styles for the Locations Management Page */
+
+.locations-header {
+    padding: 4rem 0 3rem; /* Shorter than home hero */
+}
+
+.manage-card {
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.btn-remove-location {
+    background: none;
+    border: none;
+    color: #bdc3c7;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    padding: 0;
+    cursor: pointer;
+}
+
+.btn-remove-location:hover {
+    color: #e74c3c;
+    transform: scale(1.1);
+}
+
+.location-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    color: #95a5a6;
+}
+
+/* Make cards clickable except for the remove button */
+.manage-card .location-weather {
+    cursor: pointer;
+}
+
+.location-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure the search bar inside CTA matches theme */
+.cta-section .hero-search input {
+    color: #2c3e50;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .locations-header .hero-title {
+        font-size: 2.2rem;
+    }
+}
