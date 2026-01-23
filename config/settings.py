@@ -141,3 +141,6 @@ EMAIL_HOST_USER = 'your-email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your-app-password'
 DEFAULT_FROM_EMAIL = 'noreply@clearview.com'
 CONTACT_EMAIL = 'support@clearview.com'
+
+# User Model
+AUTH_USER_MODEL = 'auth.User'

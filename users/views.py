@@ -4,23 +4,26 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from django.views.generic import TemplateView
 
 
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
 
     def get_success_url(self):
-        return reverse_lazy('profile')
+        return reverse_lazy('users:profile')
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('login')
+    next_page = reverse_lazy('users:logout')
 
+class UserProfileView(TemplateView):
+    template_name = 'users/profile.html'
 
 
 class UserRegisterView(CreateView, forms.ModelForm):
     form_class = UserCreationForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('users:login')
     model = User
 
     def get_form_class(self):
