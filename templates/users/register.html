@@ -1,27 +1,83 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Create Account{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/users-register.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<style>
+    /* Custom overrides to adapt home.css for a form */
+    .auth-container {
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+    .auth-card {
+        max-width: 450px;
+        width: 100%;
+        background: white;
+        border-radius: 25px; /* Matches .weather-widget */
+        padding: 3rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Matches .weather-widget */
+    }
+    .form-control {
+        border-radius: 50px; /* Matches .hero-search input */
+        padding: 0.75rem 1.5rem;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 1.25rem;
+    }
+    .btn-auth {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Matches .hero-section */
+        border: none;
+        color: white;
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    .btn-auth:hover {
+        transform: translateY(-3px); /* Matches .btn-cta:hover */
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    }
+</style>
 {% endblock %}
+
 {% block content %}
-<div class="container">
-    <h2 class="mt-5">Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required>
+<div class="hero-section auth-container">
+    <div class="hero-overlay"></div> <div class="auth-card">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: #2c3e50;">Join Clearview</h2>
+            <p class="text-muted">Start tracking your local weather today.</p>
         </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label ms-2 small fw-bold text-uppercase" style="color: #7f8c8d;">Username</label>
+                <input type="text" class="form-control" name="username" placeholder="Choose a username" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label ms-2 small fw-bold text-uppercase" style="color: #7f8c8d;">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label ms-2 small fw-bold text-uppercase" style="color: #7f8c8d;">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Create a password" required>
+            </div>
+
+            <button type="submit" class="btn btn-auth">Create Account</button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <span class="text-muted small">Already have an account?</span>
+            <a href="{% url 'login' %}" class="small fw-bold text-decoration-none" style="color: #667eea;"> Login</a>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+    </div>
 </div>
 {% endblock %}
 

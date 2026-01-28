@@ -90,6 +90,21 @@ Sent from Clearview Contact Form
     # GET request - show the form
     return render(request, 'pages/contact.html')
 
+# ====================  USER VIEWS  ====================
+
+def login_view(request):
+    """User login page"""
+    return render(request, 'users/login.html')
+def logout_view(request):
+    """User logout page"""
+    return render(request, 'users/logout.html')
+def register_view(request):
+    """User registration page"""
+    return render(request, 'users/register.html')
+def password_reset_view(request):
+    """User password reset page"""
+    return render(request, 'users/password_reset.html')
+
 # ==================== HELPER FUNCTIONS ====================
 def get_weather_icon(weather_code, is_day=True):
     """Convert OpenWeatherMap icon code to FontAwesome icon class"""

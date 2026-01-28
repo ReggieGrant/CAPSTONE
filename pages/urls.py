@@ -10,7 +10,13 @@ urlpatterns = [
     path('about/', views.about_view, name='about'),
     path('community/', views.community_view, name='community'),
     path('contact/', views.contact_view, name='contact'),
-    
+
+    # User management
+    path('users/login/', views.login_view, name='login'),
+    path('users/logout/', views.logout_view, name='logout'),
+    path('users/register/', views.register_view, name='register'),
+    path('users/reset/', views.password_reset_view, name='password_reset'),
+
     # API endpoints
     path('api/weather/', views.get_weather_api, name='get_weather'),
     path('api/search/', views.search_location, name='search_location'),

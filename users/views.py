@@ -14,7 +14,7 @@ class UserLoginView(LoginView):
         return reverse_lazy('users:profile')
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('users:logout')
+    next_page = reverse_lazy('users/logout')
 
 class UserProfileView(TemplateView):
     template_name = 'users/profile.html'
@@ -35,3 +35,6 @@ class UserRegisterView(CreateView, forms.ModelForm):
         user.save()
 
         return super().form_valid(form)
+    
+class PasswordResetView(TemplateView):
+    template_name = 'users/password_reset.html' 

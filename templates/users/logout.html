@@ -8,21 +8,16 @@
 <link rel="stylesheet" href="{% static 'css/users-logout.css' %}">
 {% endblock %}
 {% block content %}
-<div class="container">
-    <h2 class="mt-5">Logout</h2>
-    <form method="post">
+{% block content %}
+<div class="container text-center">
+    <h2 class="mt-5">Are you sure you want to log out?</h2>
+    <form action="{% url 'users/logout' %}" method="post" class="mt-4">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-danger">Logout</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+{% endblock %}
 {% endblock %}
 
 {% block js %}
