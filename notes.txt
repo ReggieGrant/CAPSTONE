@@ -45,3 +45,65 @@ params = {
 response = requests.get(url, params=params)
 print(f"Status Code: {response.status_code}")
 print(f"Response: {response.json()}")
+
+
+
+
+
+
+
+
+
+
+# install pillow (in case that your project uses media)
+pip install pillow
+
+# install gunicorn
+pip install gunicorn
+
+#install whitenoise
+pip install whitenoise
+
+# create requirements.txt
+pip freeze > requirements.txt
+
+# config setting.py
+'django.middleware.security.SecurityMiddleware',
+'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this line
+'django.contrib.sessions.middleware.SessionMiddleware',
+
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+
+
+
+
+
+
+
+#### HEROKU ####
+#install heroku
+https://devcenter.heroku.com/articles/getting-started-with-python#set-up
+
+heroku login
+heroku create <name>
+* Name must start with a letter, end with a letter or digit and can only contain lowercase letters, digits, and dashes.
+
+# get the app and add it to ALLOWED_HOSTS
+
+
+# create the Procfile
+web: gunicorn config.wsgi
+
+
+
+
+# push changes
+git push heroku master or main
+
+# open app
+heroku open 
