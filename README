@@ -1,0 +1,61 @@
+Clearview - Weather through the eyes of the world
+
+Clearview is a modern web application that reimagines the weather forecast. Instead of just looking at numbers, users can see what the weather actually looks like through real-time "Weather Moments" shared by a global community.
+
+Features
+
+Real-Time Visuals: View "Trending Weather Moments" from cities like San Diego, Seattle, and Aspen.
+Hyper-Local Data: Detailed current conditions for your specific location, including:
+Wind Speed, Humidity, and Visibility.
+"Feels Like" temperature and Atmospheric Ambience audio.
+7-Day Forecast: A clean, scannable outlook for the week ahead.
+Personalized Dashboard: Save and track weather for your favorite cities (e.g., Los Angeles, New York, Miami).
+Community Sharing: A dedicated portal for users to upload their own weather photos and videos.
+
+Technology Stack
+
+Frontend: Built with modern HTML, CSS, and JavaScript.
+Icons & Assets: FontAwesome integration for weather-specific iconography.
+Audio: Integrated background ambience (e.g., Clear Sky Ambience) for an immersive experience.
+
+Project Structure
+
+Home: Main dashboard featuring local weather and the 7-day forecast.
+Explore: Discover weather moments from around the globe.
+Locations: Manage your saved cities and personalized alerts.
+Community: Connect with other "weather watchers" and view top-rated moments.
+
+Getting Started
+
+Search: Use the global search bar to find any location worldwide.
+Save: Click the heart icon on any city to add it to your "Saved Locations."
+Share: Use the "Share Moment" button to contribute to the global weather feed.
+
+
+
+Technical Setup
+
+Follow these steps to get a local development instance of Clearview up and running on your machine.
+
+1. Prerequisites
+
+Ensure you have a modern web browser and a local server environment (like Python's http.server, Live Server for VS Code, or Node.js) installed.
+
+2. Clone the Repository
+Bash
+
+git clone https://github.com/yourusername/clearview.git
+cd clearview
+
+3. Launch the Application
+
+Depending on your preferred environment, run one of the following commands in your terminal:
+Using Python (Quickest):Bashpython -m http.server 8000
+
+Using Node.js (serve):Bashnpx serve .
+
+4. Access the Site
+
+Once the server is running, open your browser and navigate to:
+http://127.0.0.1:8000/
+
